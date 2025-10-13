@@ -1,0 +1,73 @@
+{
+  "name": "quran-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Quran React project with uploads, authentication, and logging",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "migrate": "node scripts/migrate.js",
+    "seed": "node scripts/seed.js",
+    "setup": "npm run migrate && npm run seed",
+    "cleanup:temp": "node scripts/cleanup.js",
+    "logs:error": "tail -f logs/error.log",
+    "logs:combined": "tail -f logs/combined.log",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix"
+  },
+  "keywords": [
+    "quran",
+    "backend",
+    "api",
+    "nodejs",
+    "sqlite",
+    "auth",
+    "audio"
+  ],
+  "author": "Quran Admin Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.4.1",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.2.1",
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "node-fetch": "^2.7.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "nodemon": "^3.1.10"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
