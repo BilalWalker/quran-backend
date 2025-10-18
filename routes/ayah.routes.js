@@ -25,7 +25,7 @@ router.put(
 // GET /api/ayah/:ayahId/translations - Get translations for a specific ayah
 router.get(
   '/:ayahId/translations',
-  authenticateToken,
+  
   ayahController.getTranslations
 );
 

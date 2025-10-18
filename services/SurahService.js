@@ -1,5 +1,5 @@
 // services/SurahService.js
-const fetch = require('node-fetch'); // You may need: npm install node-fetch@2
+const fetch = require('node-fetch');
 
 class SurahService {
   constructor(db, logger) {
@@ -10,22 +10,7 @@ class SurahService {
 
   async getAll() {
     try {
-      // Try to get from API first
-      const response = await fetch(`${this.apiBase}/surah`);
-      const data = await response.json();
-      
-      if (data.code === 200 && data.data) {
-        return data.data.map(surah => ({
-          id: surah.number,
-          name_arabic: surah.name,
-          name_english: surah.englishName,
-          name_transliterated: surah.englishNameTranslation,
-          revelation_type: surah.revelationType.toLowerCase(),
-          number_of_ayahs: surah.numberOfAyahs
-        }));
-      }
-      
-      // Fallback to database
+      // Get from local database
       return this.db.prepare(`
         SELECT 
           id, name_arabic, name_english, name_transliterated,
@@ -35,45 +20,39 @@ class SurahService {
       `).all();
     } catch (error) {
       this.logger.error('Get all surahs error:', error);
-      // If API fails, try database
-      try {
-        return this.db.prepare(`
-          SELECT 
-            id, name_arabic, name_english, name_transliterated,
-            revelation_type, number_of_ayahs, bismillah_pre
-          FROM surahs
-          ORDER BY id
-        `).all();
-      } catch (dbError) {
-        this.logger.error('Database fallback also failed:', dbError);
-        throw error;
-      }
+      throw error;
     }
   }
 
   async getSurahWithAyahs(surahNumber) {
     try {
-      // Fetch from API
-      const response = await fetch(`${this.apiBase}/surah/${surahNumber}`);
-      const data = await response.json();
+      console.log('═══════════════════════════════════════');
+      console.log('🔍 SurahService.getSurahWithAyahs called');
+      console.log('Surah number:', surahNumber);
       
-      if (data.code !== 200 || !data.data) {
-        throw new Error('Failed to fetch from API');
+      // ✅ Get surah info from LOCAL database
+      const surah = this.db.prepare('SELECT * FROM surahs WHERE id = ?').get(surahNumber);
+      
+      if (!surah) {
+        console.log('❌ Surah not found in database');
+        throw new Error('Surah not found');
       }
-
-      const surahData = data.data;
       
-      // Convert API format to our format
-      const ayahs = surahData.ayahs.map(ayah => ({
-        id: ayah.number,
-        number_in_surah: ayah.numberInSurah,
-        number_in_quran: ayah.number,
-        text_arabic: ayah.text,
-        text_uthmani: ayah.text,
-        juz_number: ayah.juz,
-        surah_id: surahNumber
-      }));
-
+      console.log('✅ Surah found:', surah.name_english);
+      
+      // ✅ Get ayahs from LOCAL database
+      const ayahs = this.db.prepare(`
+        SELECT * FROM ayahs 
+        WHERE surah_id = ? 
+        ORDER BY number_in_surah
+      `).all(surahNumber);
+      
+      console.log('✅ Ayahs found:', ayahs.length);
+      
+      if (ayahs.length > 0) {
+        console.log('First ayah text_arabic:', ayahs[0].text_arabic?.substring(0, 50));
+      }
+      
       // Check which ayahs have custom audio in database
       const ayahsWithAudioStatus = await Promise.all(
         ayahs.map(async (ayah) => {
@@ -85,16 +64,15 @@ class SurahService {
           };
         })
       );
+      
+      console.log('✅ Returning surah data with', ayahsWithAudioStatus.length, 'ayahs');
+      console.log('═══════════════════════════════════════');
 
       return {
-        id: surahNumber,
-        name_arabic: surahData.name,
-        name_english: surahData.englishName,
-        name_transliterated: surahData.englishNameTranslation,
-        revelation_type: surahData.revelationType.toLowerCase(),
-        number_of_ayahs: surahData.numberOfAyahs,
+        ...surah,
         ayahs: ayahsWithAudioStatus
       };
+      
     } catch (error) {
       this.logger.error('Get surah with ayahs error:', error);
       throw error;
@@ -103,7 +81,6 @@ class SurahService {
 
   async getAudioForAyah(surahNumber, verseNumber) {
     try {
-      // Check if there's custom uploaded audio for this ayah
       const rows = this.db.prepare(`
         SELECT 
           af.*,
@@ -123,26 +100,20 @@ class SurahService {
 
   getAyahBySurahAndVerse(surahNumber, verseNumber) {
     try {
-      // Try to find in database first (for custom uploads)
       let row = this.db.prepare(
         'SELECT * FROM ayahs WHERE surah_id = ? AND number_in_surah = ?'
       ).get(surahNumber, verseNumber);
       
       if (!row) {
-        // Create a placeholder record for audio upload
         const stmt = this.db.prepare(`
           INSERT INTO ayahs (surah_id, number_in_surah, number_in_quran, text_arabic)
           VALUES (?, ?, ?, ?)
         `);
         
-        // Approximate number_in_quran (you can calculate properly later)
         const approxQuranNumber = (surahNumber - 1) * 100 + verseNumber;
-        
         const result = stmt.run(surahNumber, verseNumber, approxQuranNumber, 'Text from API');
         
-        row = this.db.prepare(
-          'SELECT * FROM ayahs WHERE id = ?'
-        ).get(result.lastInsertRowid);
+        row = this.db.prepare('SELECT * FROM ayahs WHERE id = ?').get(result.lastInsertRowid);
       }
       
       return row;
@@ -154,7 +125,6 @@ class SurahService {
 
   getStats() {
     try {
-      // Return stats from database for custom content
       const row = this.db.prepare(`
         SELECT 
           COUNT(DISTINCT a.surah_id) as custom_surahs,
@@ -165,8 +135,8 @@ class SurahService {
       `).get();
       
       return {
-        total_surahs: 114, // Fixed - Quran has 114 surahs
-        total_ayahs: 6236, // Fixed - Quran has 6236 verses
+        total_surahs: 114,
+        total_ayahs: 6236,
         custom_ayahs: row.custom_ayahs || 0,
         uploaded_audio: row.uploaded_audio_files || 0
       };

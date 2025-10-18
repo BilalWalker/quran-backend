@@ -2,34 +2,44 @@ const db = require('../config/db');
 
 class AyahController {
   // Update Ayah Arabic text
-  updateAyah(req, res) {
-    try {
-      const logger = req.app.locals.logger;
-      const { ayahId } = req.params;
-      const { text_arabic, text_uthmani } = req.body;
-      
-      if (!text_arabic) {
-        return res.status(400).json({ error: 'Arabic text is required' });
-      }
+  // ayah.controller.js - Updated updateAyah method with full debugging
 
-      const result = db.prepare(`
-        UPDATE ayahs 
-        SET text_arabic = ?, text_uthmani = ?, updated_at = CURRENT_TIMESTAMP
-        WHERE id = ?
-      `).run(text_arabic, text_uthmani || text_arabic, ayahId);
-      
-      if (result.changes === 0) {
-        return res.status(404).json({ error: 'Ayah not found' });
-      }
-      
-      logger.info(`Ayah ${ayahId} updated by ${req.user.username}`);
-      res.json({ success: true, message: 'Ayah updated successfully' });
-    } catch (error) {
-      const logger = req.app.locals.logger;
-      logger.error('Update ayah error:', error);
-      res.status(500).json({ error: 'Failed to update ayah' });
+updateAyah(req, res) {
+  try {
+    const logger = req.app.locals.logger;
+    const { ayahId } = req.params;
+    const { text_arabic, text_uthmani } = req.body;
+    
+    if (!text_arabic) {
+      return res.status(400).json({ error: 'Arabic text is required' });
     }
+
+    const result = db.prepare(`
+      UPDATE ayahs 
+      SET text_arabic = ?, text_uthmani = ?, updated_at = CURRENT_TIMESTAMP
+      WHERE id = ?
+    `).run(text_arabic, text_uthmani || text_arabic, ayahId);
+    
+    if (result.changes === 0) {
+      return res.status(404).json({ error: 'Ayah not found' });
+    }
+    
+    // ✅ Return the updated ayah
+    const updatedAyah = db.prepare('SELECT * FROM ayahs WHERE id = ?').get(ayahId);
+    
+    logger.info(`Ayah ${ayahId} updated by ${req.user.username}`);
+    
+    res.json({ 
+      success: true, 
+      message: 'Ayah updated successfully',
+      data: updatedAyah // ✅ Return the updated data
+    });
+  } catch (error) {
+    const logger = req.app.locals.logger;
+    logger.error('Update ayah error:', error);
+    res.status(500).json({ error: 'Failed to update ayah' });
   }
+}
 
   // Update ayah indexing
   updateIndexing(req, res) {

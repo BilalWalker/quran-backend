@@ -15,6 +15,22 @@ if (!fs.existsSync(dbFolder)) {
 // Connect to SQLite
 const db = new Database(dbPath);
 
+// ✅ CRITICAL: Set UTF-8 encoding for Arabic text support
+db.pragma('encoding = "UTF-8"');
+
+// ✅ Recommended: Enable foreign keys and WAL mode
+db.pragma('foreign_keys = ON');
+db.pragma('journal_mode = WAL');
+
+// ✅ ADD THIS: Check the ayahs table structure
+console.log('🔍 Checking ayahs table structure...');
+try {
+  const tableInfo = db.prepare("SELECT sql FROM sqlite_master WHERE type='table' AND name='ayahs'").get();
+  console.log('Ayahs table SQL:', tableInfo?.sql);
+} catch (error) {
+  console.log('⚠️ Ayahs table does not exist yet');
+}
+
 // Initialize tables if they don't exist
 const initQueries = [
   `CREATE TABLE IF NOT EXISTS users (
@@ -27,7 +43,6 @@ const initQueries = [
       last_login DATETIME,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );`
-  // You can add more table creations here if needed
 ];
 
 initQueries.forEach((q) => db.prepare(q).run());

@@ -5,9 +5,9 @@ const surahController = require('../controllers/surah.controller');
 const router = express.Router();
 
 // GET /api/surahs - Get all surahs
-router.get('/', authenticateToken, surahController.getAll);
+router.get('/', surahController.getAll);
 
 // GET /api/surah/:number - Get surah by number with ayahs
-router.get('/:number', authenticateToken, surahController.getByNumber);
+router.get('/:number', surahController.getByNumber);
 
 module.exports = router;
