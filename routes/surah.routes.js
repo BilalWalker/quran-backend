@@ -1,13 +1,33 @@
 const express = require('express');
-const { authenticateToken } = require('../middleware/auth');
+const { authenticateToken, authorize, logActivity } = require('../middleware/auth');
 const surahController = require('../controllers/surah.controller');
 
 const router = express.Router();
 
+console.log('🔍 surahController:', surahController);
+console.log('🔍 surahController.getAll:', typeof surahController.getAll);
+console.log('🔍 surahController.getSurahTranslations:', typeof surahController.getSurahTranslations);
+
 // GET /api/surahs - Get all surahs
 router.get('/', surahController.getAll);
 
-// GET /api/surah/:number - Get surah by number with ayahs
-router.get('/:number', surahController.getByNumber);
+// GET /api/surah/:surahNumber/translations/:sourceId - Get all translations for a surah
+// IMPORTANT: This must come BEFORE the generic /:surahNumber route
+router.get(
+  '/:surahNumber/translations/:sourceId',
+  surahController.getSurahTranslations
+);
+
+// GET /api/surah/:surahNumber - Get specific surah with ayahs
+router.get('/:surahNumber', surahController.getByNumber);
+
+// PUT /api/surah/:surahNumber - Update surah metadata
+router.put(
+  '/:surahNumber',
+  authenticateToken,
+  authorize(['admin']),
+  logActivity('update_surah'),
+  surahController.updateSurah
+);
 
 module.exports = router;

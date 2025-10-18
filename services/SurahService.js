@@ -4,13 +4,12 @@ const fetch = require('node-fetch');
 class SurahService {
   constructor(db, logger) {
     this.db = db;
-    this.logger = logger;
+    this.logger = logger || console;
     this.apiBase = 'https://api.alquran.cloud/v1';
   }
 
   async getAll() {
     try {
-      // Get from local database
       return this.db.prepare(`
         SELECT 
           id, name_arabic, name_english, name_transliterated,
@@ -26,53 +25,58 @@ class SurahService {
 
   async getSurahWithAyahs(surahNumber) {
     try {
-      console.log('═══════════════════════════════════════');
-      console.log('🔍 SurahService.getSurahWithAyahs called');
-      console.log('Surah number:', surahNumber);
+      const startTime = Date.now();
+      console.log('🔍 Fetching surah:', surahNumber);
       
-      // ✅ Get surah info from LOCAL database
+      // Get surah info
       const surah = this.db.prepare('SELECT * FROM surahs WHERE id = ?').get(surahNumber);
+      if (!surah) throw new Error('Surah not found');
       
-      if (!surah) {
-        console.log('❌ Surah not found in database');
-        throw new Error('Surah not found');
-      }
-      
-      console.log('✅ Surah found:', surah.name_english);
-      
-      // ✅ Get ayahs from LOCAL database
+      // Get ayahs
       const ayahs = this.db.prepare(`
         SELECT * FROM ayahs 
         WHERE surah_id = ? 
         ORDER BY number_in_surah
       `).all(surahNumber);
       
-      console.log('✅ Ayahs found:', ayahs.length);
+      console.log('✅ Got', ayahs.length, 'ayahs in', Date.now() - startTime, 'ms');
       
-      if (ayahs.length > 0) {
-        console.log('First ayah text_arabic:', ayahs[0].text_arabic?.substring(0, 50));
-      }
+      // ✅ OPTIMIZED: Get ALL audio in ONE query
+      const audioStart = Date.now();
+      const audioFiles = this.db.prepare(`
+        SELECT 
+          af.*,
+          r.name as reciter_name,
+          a.number_in_surah
+        FROM audio_files af
+        JOIN reciters r ON af.reciter_id = r.id
+        JOIN ayahs a ON af.ayah_id = a.id
+        WHERE a.surah_id = ? AND af.is_active = 1
+      `).all(surahNumber);
       
-      // Check which ayahs have custom audio in database
-      const ayahsWithAudioStatus = await Promise.all(
-        ayahs.map(async (ayah) => {
-          const audioFiles = await this.getAudioForAyah(surahNumber, ayah.number_in_surah);
-          return {
-            ...ayah,
-            hasAudio: audioFiles.length > 0,
-            audioFiles
-          };
-        })
-      );
+      console.log('✅ Got', audioFiles.length, 'audio files in', Date.now() - audioStart, 'ms');
       
-      console.log('✅ Returning surah data with', ayahsWithAudioStatus.length, 'ayahs');
-      console.log('═══════════════════════════════════════');
-
+      // Map audio to ayahs
+      const audioMap = {};
+      audioFiles.forEach(audio => {
+        if (!audioMap[audio.number_in_surah]) {
+          audioMap[audio.number_in_surah] = [];
+        }
+        audioMap[audio.number_in_surah].push(audio);
+      });
+      
+      const ayahsWithAudio = ayahs.map(ayah => ({
+        ...ayah,
+        hasAudio: (audioMap[ayah.number_in_surah] || []).length > 0,
+        audioFiles: audioMap[ayah.number_in_surah] || []
+      }));
+      
+      console.log('✅ Total time:', Date.now() - startTime, 'ms');
+      
       return {
         ...surah,
-        ayahs: ayahsWithAudioStatus
+        ayahs: ayahsWithAudio
       };
-      
     } catch (error) {
       this.logger.error('Get surah with ayahs error:', error);
       throw error;
@@ -81,7 +85,7 @@ class SurahService {
 
   async getAudioForAyah(surahNumber, verseNumber) {
     try {
-      const rows = this.db.prepare(`
+      return this.db.prepare(`
         SELECT 
           af.*,
           r.name as reciter_name
@@ -90,8 +94,6 @@ class SurahService {
         JOIN ayahs a ON af.ayah_id = a.id
         WHERE a.surah_id = ? AND a.number_in_surah = ? AND af.is_active = 1
       `).all(surahNumber, verseNumber);
-      
-      return rows;
     } catch (error) {
       this.logger.error('Get audio for ayah error:', error);
       return [];
