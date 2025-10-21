@@ -18,31 +18,74 @@ class UserController {
   }
 
   async create(req, res) {
-    try {
-      const logger = req.app.locals.logger;
-      const { username, email, password, role = 'editor' } = req.body;
+  try {
+    const logger = req.app.locals.logger;
+    const { username, email, password, role = 'editor' } = req.body;
+    
+    // Validate required fields
+    if (!username || !password) {
+      return res.status(400).json({ 
+        error: 'Username and password are required' 
+      });
+    }
+
+    // ✅ Validate password strength on backend too
+    if (password.length < 8) {
+      return res.status(400).json({ 
+        error: 'Password must be at least 8 characters long' 
+      });
+    }
+    
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
+      return res.status(400).json({ 
+        error: 'Password must contain at least one uppercase letter, one lowercase letter, and one number' 
+      });
+    }
+
+    // ✅ Check if username already exists
+    const existingUser = db.prepare(
+      'SELECT id FROM users WHERE username = ?'
+    ).get(username);
+    
+    if (existingUser) {
+      return res.status(400).json({ 
+        error: 'Username already exists' 
+      });
+    }
+
+    // ✅ Check if email already exists (if provided)
+    if (email && email.trim() !== '') {
+      const existingEmail = db.prepare(
+        'SELECT id FROM users WHERE email = ?'
+      ).get(email);
       
-      if (!username || !password) {
+      if (existingEmail) {
         return res.status(400).json({ 
-          error: 'Username and password are required' 
+          error: 'Email already exists' 
         });
       }
-
-      const hashedPassword = await hashPassword(password);
-      const userId = userService.create({
-        username,
-        email,
-        password_hash: hashedPassword,
-        role
-      });
-
-      res.json({ success: true, data: { id: userId } });
-    } catch (error) {
-      const logger = req.app.locals.logger;
-      logger.error('Create user error:', error);
-      res.status(500).json({ error: 'Failed to create user' });
     }
+
+    const hashedPassword = await hashPassword(password);
+    const userId = userService.create({
+      username,
+      email,
+      password_hash: hashedPassword,
+      role
+    });
+
+    logger.info(`User ${username} created successfully`);
+    res.json({ success: true, data: { id: userId } });
+  } catch (error) {
+    const logger = req.app.locals.logger;
+    logger.error('Create user error:', error);
+    
+    // ✅ Return the actual error message
+    res.status(500).json({ 
+      error: error.message || 'Failed to create user' 
+    });
   }
+}
 
   getById(req, res) {
     try {
@@ -160,6 +203,43 @@ class UserController {
       res.status(500).json({ error: 'Failed to update user' });
     }
   }
+
+  hardDelete(req, res) {
+  try {
+    const logger = req.app.locals.logger;
+    const { userId } = req.params;
+    
+    // Only allow admins to hard delete
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'Only admins can permanently delete users' });
+    }
+    
+    // Don't allow deleting yourself
+    if (parseInt(userId) === req.user.id) {
+      return res.status(400).json({ error: 'Cannot delete your own account' });
+    }
+    
+    // Check if user exists
+    const user = userService.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    // HARD DELETE - permanently remove from database
+    const result = db.prepare('DELETE FROM users WHERE id = ?').run(userId);
+    
+    if (result.changes > 0) {
+      logger.warn(`User ${userId} (${user.username}) PERMANENTLY DELETED by ${req.user.username}`);
+      res.json({ success: true, message: 'User permanently deleted' });
+    } else {
+      res.status(500).json({ error: 'Failed to delete user' });
+    }
+  } catch (error) {
+    const logger = req.app.locals.logger;
+    logger.error('Hard delete user error:', error);
+    res.status(500).json({ error: 'Failed to delete user' });
+  }
+}
 
   delete(req, res) {
     try {

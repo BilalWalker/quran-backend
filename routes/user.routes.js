@@ -1,29 +1,59 @@
 const express = require('express');
 const { authenticateToken, authorize, logActivity } = require('../middleware/auth');
-const surahController = require('../controllers/surah.controller');
+const userController = require('../controllers/user.controller');
 
 const router = express.Router();
 
-// GET /api/surahs - Get all surahs
-router.get('/', surahController.getAll);
-
-// GET /api/surah/:surahNumber/translations/:sourceId - Get all translations for a surah
-// IMPORTANT: This must come BEFORE the generic /:surahNumber route
+// GET /api/users - Get all users with pagination and search
 router.get(
-  '/:surahNumber/translations/:sourceId',
-  surahController.getSurahTranslations
-);
-
-// GET /api/surah/:surahNumber - Get specific surah with ayahs
-router.get('/:surahNumber', surahController.getByNumber);
-
-// PUT /api/surah/:surahNumber - Update surah metadata
-router.put(
-  '/:surahNumber',
+  '/',
   authenticateToken,
   authorize(['admin']),
-  logActivity('update_surah'),
-  surahController.updateSurah
+  userController.getAll
 );
+
+// POST /api/users - Create new user
+router.post(
+  '/',
+  authenticateToken,
+  authorize(['admin']),
+  logActivity('create_user'),
+  userController.create
+);
+
+// GET /api/users/:userId - Get specific user
+router.get(
+  '/:userId',
+  authenticateToken,
+  authorize(['admin']),
+  userController.getById
+);
+
+// PUT /api/users/:userId - Update user
+router.put(
+  '/:userId',
+  authenticateToken,
+  authorize(['admin']),
+  logActivity('update_user'),
+  userController.update
+);
+
+router.delete(
+  '/:userId/permanent',
+  authenticateToken,
+  authorize(['admin']),
+  logActivity('hard_delete_user'),
+  userController.hardDelete
+);
+
+// DELETE /api/users/:userId - Deactivate user (soft delete)
+router.delete(
+  '/:userId',
+  authenticateToken,
+  authorize(['admin']),
+  logActivity('delete_user'),
+  userController.delete
+);
+
 
 module.exports = router;

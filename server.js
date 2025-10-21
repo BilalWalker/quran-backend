@@ -119,8 +119,8 @@ app.use('/api/surahs', surahRoutes);
 app.use('/api/surah', surahRoutes);
 app.use('/api/translations', translationRoutes);
 app.use('/api/translation', translationRoutes);
-app.use('/api/audio', audioRoutes); // ✅ This is the main audio route
-app.use('/api', audioRoutes); // ✅ This handles /api/reciters
+app.use('/api/audio', audioRoutes); // main audio route
+app.use('/api', audioRoutes); // handles /api/reciters
 app.use('/api/search', searchRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/activity-logs', analyticsRoutes);
