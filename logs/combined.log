@@ -5379,3 +5379,128 @@
 {"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:10:00.410Z"}
 {"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:10:32.057Z"}
 {"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:10:32.063Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:40:11.794Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:40:12.286Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:40:12.467Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:40:12.473Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:40:41.466Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:40:41.472Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:40:56.479Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:40:56.485Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:42:12.463Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:42:12.473Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:42:14.470Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:42:14.474Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"quran-admin-backend","timestamp":"2025-10-21T07:42:53.621Z"}
+{"level":"info","message":"Quran Admin Server running on port 3001","service":"quran-admin-backend","timestamp":"2025-10-21T07:42:56.677Z"}
+{"level":"info","message":"Environment: development","service":"quran-admin-backend","timestamp":"2025-10-21T07:42:56.681Z"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","service":"quran-admin-backend","timestamp":"2025-10-21T07:42:56.684Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:43:17.914Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:43:17.926Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","url":"/api/auth/login"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:43:23.782Z"}
+{"level":"info","message":"User admin logged in successfully","service":"quran-admin-backend","timestamp":"2025-10-21T07:43:24.179Z","userId":1}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:43:24.208Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:43:24.218Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:43:52.475Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:43:52.479Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats?page=1&limit=100"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:44:17.167Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:45:33.499Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:46:20.300Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:46:20.304Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats?page=1&limit=100"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:46:21.634Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats?page=1&limit=100"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:50:54.462Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:51:01.123Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:51:02.857Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:51:02.862Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats?page=1&limit=100"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:51:04.663Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats?page=1&limit=100"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:52:05.465Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:54:02.070Z"}
+{"level":"info","message":"Naat created: 1 by admin","service":"quran-admin-backend","timestamp":"2025-10-21T07:54:02.077Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats?page=1&limit=100"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:54:02.092Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:54:26.936Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:54:27.875Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"quran-admin-backend","timestamp":"2025-10-21T07:58:08.770Z"}
+{"level":"info","message":"Quran Admin Server running on port 3001","service":"quran-admin-backend","timestamp":"2025-10-21T07:58:11.617Z"}
+{"level":"info","message":"Environment: development","service":"quran-admin-backend","timestamp":"2025-10-21T07:58:11.621Z"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","service":"quran-admin-backend","timestamp":"2025-10-21T07:58:11.623Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:58:20.613Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:58:21.699Z"}
+{"level":"info","message":"Naats retrieved: 1","service":"quran-admin-backend","timestamp":"2025-10-21T07:58:21.711Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:58:42.589Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:58:50.385Z"}
+{"level":"info","message":"Naats retrieved: 1","service":"quran-admin-backend","timestamp":"2025-10-21T07:58:50.393Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:58:53.494Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:58:59.747Z"}
+{"level":"info","message":"Naats retrieved: 1","service":"quran-admin-backend","timestamp":"2025-10-21T07:58:59.750Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:59:00.464Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:59:31.492Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:59:48.489Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:59:49.471Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:59:54.203Z"}
+{"level":"info","message":"Naats retrieved: 1","service":"quran-admin-backend","timestamp":"2025-10-21T07:59:54.207Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:59:55.425Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:59:56.793Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/reciters"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:59:56.809Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:59:58.750Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/translations/sources"},"service":"quran-admin-backend","timestamp":"2025-10-21T07:59:58.755Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats?page=1&limit=100"},"service":"quran-admin-backend","timestamp":"2025-10-21T08:00:00.983Z"}
+{"level":"info","message":"Naats retrieved: 1","service":"quran-admin-backend","timestamp":"2025-10-21T08:00:00.986Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T08:02:34.556Z"}
+{"level":"info","message":"Naats retrieved: 1","service":"quran-admin-backend","timestamp":"2025-10-21T08:02:34.564Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T08:09:32.465Z"}
+{"level":"info","message":"Naats retrieved: 1","service":"quran-admin-backend","timestamp":"2025-10-21T08:09:32.467Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T08:09:50.456Z"}
+{"level":"info","message":"Naats retrieved: 1","service":"quran-admin-backend","timestamp":"2025-10-21T08:09:50.458Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T08:13:57.467Z"}
+{"level":"info","message":"Naats retrieved: 1","service":"quran-admin-backend","timestamp":"2025-10-21T08:13:57.469Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T08:14:17.526Z"}
+{"level":"info","message":"Naats retrieved: 1","service":"quran-admin-backend","timestamp":"2025-10-21T08:14:17.546Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/naats"},"service":"quran-admin-backend","timestamp":"2025-10-21T08:14:49.462Z"}
+{"level":"info","message":"Naats retrieved: 1","service":"quran-admin-backend","timestamp":"2025-10-21T08:14:49.464Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"quran-admin-backend","timestamp":"2025-10-21T08:26:50.583Z"}
+{"level":"info","message":"Quran Admin Server running on port 3001","service":"quran-admin-backend","timestamp":"2025-10-22T07:22:47.559Z"}
+{"level":"info","message":"Environment: development","service":"quran-admin-backend","timestamp":"2025-10-22T07:22:47.566Z"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","service":"quran-admin-backend","timestamp":"2025-10-22T07:22:47.568Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api"},"service":"quran-admin-backend","timestamp":"2025-10-22T07:23:10.170Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/favicon.ico"},"service":"quran-admin-backend","timestamp":"2025-10-22T07:23:10.727Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/"},"service":"quran-admin-backend","timestamp":"2025-10-22T07:23:59.674Z"}
+{"level":"info","message":"Quran Admin Server running on port 3001","service":"quran-admin-backend","timestamp":"2025-10-22T08:31:44.255Z"}
+{"level":"info","message":"Environment: development","service":"quran-admin-backend","timestamp":"2025-10-22T08:31:44.261Z"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","service":"quran-admin-backend","timestamp":"2025-10-22T08:31:44.263Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"quran-admin-backend","timestamp":"2025-10-22T08:53:17.901Z"}
+{"level":"info","message":"Quran Admin Server running on port 3001","service":"quran-admin-backend","timestamp":"2025-10-27T07:06:35.219Z"}
+{"level":"info","message":"Environment: development","service":"quran-admin-backend","timestamp":"2025-10-27T07:06:35.223Z"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","service":"quran-admin-backend","timestamp":"2025-10-27T07:06:35.224Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:06:40.721Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:06:47.249Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1/translations/23"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:06:47.300Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:07:45.754Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:10:02.201Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1/translations/23"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:10:02.236Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:16:56.130Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:17:01.141Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:18:19.105Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:19:07.685Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:19:10.789Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1/translations/23"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:19:10.827Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:23:33.696Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:24:28.104Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:25:00.097Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1/translations/23"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:25:00.136Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:25:25.140Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:25:33.103Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:32:05.277Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:32:22.123Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1/translations/23"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:32:22.160Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:41:05.110Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:41:13.105Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:41:19.158Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surahs"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:41:33.112Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:41:49.023Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1/translations/23"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:41:49.052Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/2"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:45:12.919Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/2/translations/23"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:45:13.024Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:48:03.072Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1/translations/23"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:48:03.130Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:48:33.654Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","url":"/api/surah/1/translations/23"},"service":"quran-admin-backend","timestamp":"2025-10-27T07:48:33.750Z"}

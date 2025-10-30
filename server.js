@@ -24,6 +24,7 @@ const audioRoutes = require('./routes/audio.routes');
 const searchRoutes = require('./routes/search.routes');
 const analyticsRoutes = require('./routes/analytics.routes');
 const importExportRoutes = require('./routes/importExport.routes');
+const naatRoutes = require('./routes/naat.routes'); // ✅ NEW
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -91,16 +92,6 @@ app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// // Rate limiting
-// const limiter = rateLimit({
-//   windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
-//   max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
-//   message: { error: 'Too many requests from this IP, please try again later.' },
-//   standardHeaders: true,
-//   legacyHeaders: false,
-// });
-// app.use('/api/', limiter);
-
 // Request logging middleware
 app.use(requestLogger(logger));
 
@@ -113,13 +104,14 @@ app.use('/audio', express.static('public/audio', {
 
 // API Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/naats', naatRoutes); // ✅ PUBLIC ROUTES - Must come before any auth middleware
 app.use('/api/ayah', ayahRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/surahs', surahRoutes);
 app.use('/api/surah', surahRoutes);
 app.use('/api/translations', translationRoutes);
 app.use('/api/translation', translationRoutes);
-app.use('/api/audio', audioRoutes); // main audio route
+app.use('/api/audio', audioRoutes);
 app.use('/api', audioRoutes); // handles /api/reciters
 app.use('/api/search', searchRoutes);
 app.use('/api/analytics', analyticsRoutes);

@@ -42,6 +42,17 @@ const initQueries = [
       is_active INTEGER DEFAULT 1,
       last_login DATETIME,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );`,
+  
+  // ✅ NEW: Naats table
+  `CREATE TABLE IF NOT EXISTS naats (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT NOT NULL,
+      arabic_text TEXT NOT NULL,
+      urdu_translation TEXT,
+      english_translation TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );`
 ];
 
